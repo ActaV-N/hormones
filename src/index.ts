@@ -12,8 +12,8 @@ import BeforeParticle from './animations/beforeParticle';
 gsap.registerPlugin(ScrollTrigger);
 
 setColorConfigure({
-  canvasColor: '#1e1e1e',
-  particleColor: '#f7f7f7',
+  canvasColor: '#f7f7f7',
+  particleColor: '#c5cbe3',
 });
 
 const activeText = (trigger: Element | undefined | null) => {
@@ -38,8 +38,8 @@ const activeText = (trigger: Element | undefined | null) => {
 };
 
 const changeColor = (
-  particleColor: string = '#f7f7f7',
-  backgroundColor: string = '#1e1e1e',
+  particleColor: string = '#c5cbe3',
+  backgroundColor: string = '#f7f7f7',
 ) => {
   smoothChangeColor({
     particleColor: particleColor,
@@ -52,9 +52,9 @@ const particleSections: NodeList =
 
 for (const section of particleSections) {
   const particleColor =
-    (section as Element).getAttribute('particle') || ('#f7f7f7' as string);
+    (section as Element).getAttribute('particle') || ('#c5cbe3' as string);
   const backgroundColor =
-    (section as Element).getAttribute('background') || ('#1e1e1e' as string);
+    (section as Element).getAttribute('background') || ('#f7f7f7' as string);
 
   const tl = gsap
     .timeline({

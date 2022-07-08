@@ -6,7 +6,7 @@ import Particle from './particles';
 
 // P5 var
 let stateChange: boolean = false;
-const maxRamble = 500;
+export const maxRamble = 500;
 
 const particles: Particle[] = [];
 let tps: {

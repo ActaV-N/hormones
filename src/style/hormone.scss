@@ -1,0 +1,24 @@
+section[data-section='hormone'] {
+  .section-content {
+    .left-right--container {
+      width: 100%;
+      display: flex;
+
+      .left-right--item {
+        flex: 1;
+
+        &.left {
+          padding: 0 3vw 0 11.6vw;
+        }
+
+        &.right {
+          padding: 0 11.6vw 0 3vw;
+
+          .right-item-1 {
+            padding-top: 80vh;
+          }
+        }
+      }
+    }
+  }
+}

@@ -66,10 +66,10 @@ const BeforeParticle = () => {
   };
 
   const deactivateContainer = (index: number) => {
+    if (index === containerLength) return;
     const visual = visuals[index] as Element;
     const img = visual.querySelector('img');
     const text = texts[index];
-
     const tl = gsap.timeline().addLabel('start');
 
     gsap.killTweensOf(img, 'transform');
@@ -111,8 +111,8 @@ const BeforeParticle = () => {
 
       for (let i = 1; i <= containerLength; i++) {
         if (
-          ratio > ((i - 1) * 1) / containerLength &&
-          ratio < (i * 1) / containerLength
+          ratio > ((i - 1) * 1) / (containerLength + 1) &&
+          ratio < (i * 1) / (containerLength + 1)
         ) {
           if (prevIndex !== current) {
             deactivateContainer(prevIndex);
@@ -122,6 +122,16 @@ const BeforeParticle = () => {
           break;
         }
       }
+      if (
+        ratio > (containerLength * 1) / (containerLength + 1) &&
+        ratio < ((containerLength + 1) * 1) / (containerLength + 1)
+      ) {
+        if (prevIndex !== current) {
+          console.log('finish');
+        }
+        trigger.dataset.active = containerLength;
+      }
+
       prevIndex = current;
     },
   });

@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import P5 from 'p5';
 import { colorConfigure, particleConfigure } from './configure';
-import { killParticle, mode } from './sketch';
+import { killParticle, maxRamble, mode } from './sketch';
 
 const DELAY_ACC = 0.0001;
 
@@ -74,7 +74,7 @@ export default class Particle {
     }
   }
 
-  setTarget(to?: { x: number; y: number }, die: boolean = false) {
+  setTarget(to?: { x: number; y: number }) {
     if (!to) {
       const index = this.index;
       const tl = gsap.timeline().addLabel('setting');
@@ -101,15 +101,27 @@ export default class Particle {
           radius: particleConfigure.defaultSize,
           ease: 'circ.out',
           duration: 1.5,
-          delay: (DELAY_ACC * this.index) / 1,
-          onComplete() {
-            if (die) {
-              killParticle(index);
-            }
-          },
+          delay: DELAY_ACC * index,
         },
         'start',
       );
+
+      if (maxRamble <= index) {
+        tl.addLabel('die', '>');
+        gsap.to(
+          this,
+          {
+            radius: 0,
+            ease: 'power1.inOut',
+            duration: 0.3,
+            delay: DELAY_ACC * index,
+            onComplete() {
+              // killParticle(index);
+            },
+          },
+          // 'die',
+        );
+      }
     } else {
       const easeList = [
         'back.out(1)',
