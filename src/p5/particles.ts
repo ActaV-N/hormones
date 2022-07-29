@@ -32,6 +32,7 @@ export default class Particle {
 
   // variable for sensoring change
   private isChanged: boolean;
+  private isTextPoint: boolean = false;
 
   // Color
   private fillColor: string;
@@ -76,7 +77,10 @@ export default class Particle {
 
   setTarget(to?: { x: number; y: number }) {
     if (!to) {
+      this.isTextPoint = false;
       const index = this.index;
+      const isTextPoint = this.isTextPoint;
+
       const tl = gsap.timeline().addLabel('setting');
 
       tl.set(
@@ -106,23 +110,24 @@ export default class Particle {
         'start',
       );
 
-      if (maxRamble <= index) {
-        tl.addLabel('die', '>');
-        gsap.to(
-          this,
-          {
-            radius: 0,
-            ease: 'power1.inOut',
-            duration: 0.3,
-            delay: DELAY_ACC * index,
-            onComplete() {
-              // killParticle(index);
-            },
-          },
-          // 'die',
-        );
+      if (maxRamble <= index && !isTextPoint) {
+        // tl.addLabel('die', '>');
+        // tl.to(
+        //   this,
+        //   {
+        //     radius: 0,
+        //     ease: 'power1.inOut',
+        //     duration: 0.3,
+        //     delay: DELAY_ACC * index,
+        //     onComplete() {
+        //       killParticle(index);
+        //     },
+        //   },
+        //   'die',
+        // );
       }
     } else {
+      this.isTextPoint = true;
       const easeList = [
         'back.out(1)',
         'power2.inOut',

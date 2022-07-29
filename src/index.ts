@@ -7,7 +7,7 @@ import {
   setColorConfigure,
   smoothChangeColor,
 } from './p5/configure';
-import BeforeParticle from './animations/beforeParticle';
+// import BeforeParticle from './animations/beforeParticle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,4 +85,4 @@ for (const section of particleSections) {
     .addLabel('start');
 }
 
-BeforeParticle();
+// BeforeParticle();
